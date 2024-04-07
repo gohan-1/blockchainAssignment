@@ -1,49 +1,56 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.18;
-
-contract MyToken{
+import './IERC20.sol';
+contract MyToken is IERC20 {
     // constructor
     string public name = "My Token";
-    string public symbol ="VIS";
-    string public standard="MyToken version 0.1";
+    string public symbol = "VIS";
+    string public standard = "MyToken version 0.1";
     uint256 public totalSupply;
-    mapping(address=>mapping(address=>uint256))public allowance;
-    mapping(address=>uint256) public balanceOf;
-    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+    address public owner;
+    mapping(address => uint256) holds; 
+    address public admin;
 
+    mapping(address => mapping(address => uint256)) public allowance;
+    mapping(address => uint256)  public balanceOf;
 
-    event Transfer(address _from, address _to,uint256 _value);
-    constructor(uint256 _initalSppply){
-        balanceOf[msg.sender]=  _initalSppply;
-        totalSupply = _initalSppply;
+    constructor(uint256 _initialSupply) {
+         admin = msg.sender;
+        balanceOf[admin] = _initialSupply;
+        totalSupply = _initialSupply;
+        owner=admin;
+       
     }
 
-    function transfer(address _to, uint256  _value) public returns (bool success){
-       require(balanceOf[msg.sender] >= _value); 
-       balanceOf[msg.sender] -= _value;
-       balanceOf[_to] += _value;
-       emit Transfer(msg.sender, _to, _value);
-       return true;
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Admin can only do this operation");
+        _;
+    }
+
+    function transfer(address _to, uint256 _value) public override  returns (bool success) {
+        require(balanceOf[admin] >= _value,"insufficient balancesss"); 
+        balanceOf[admin] =balanceOf[admin] - _value;
+        balanceOf[_to] += _value;
+        emit Transfer(admin, _to, _value);
+        holds[_to]+= _value;
+        return true;
     }  
 
-    function approve(address _spender, uint256 _value) public returns (bool success){
-            //alwance function
-            allowance[msg.sender][_spender]=_value;
+    function approve(address _spender, uint256 _value) public override returns (bool success){
+        // Allowance function
+        allowance[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
 
-            emit Approval(msg.sender,_spender,_value);
-
-            return true;
-        
-
-
-     }
-     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success){
-            require(_value<=balanceOf[_from],"failed");
-            require(_value<=allowance[_from][msg.sender]);
-            balanceOf[_from] -=_value;
-            balanceOf[_to]+=_value;
-            allowance[_from][msg.sender]-=_value;
-            emit Transfer(_from,_to,_value);
-            return true;
+    function transferFrom(address _from, address _to, uint256 _value) public override returns (bool success) {
+        require(_value <= balanceOf[_from], "Insufficient balance");
+        require(_value <= allowance[_from][msg.sender], "Allowance exceeded");
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        allowance[_from][msg.sender] -= _value;
+        emit Transfer(_from, _to, _value);
+        owner = _to;
+        return true;
     }
 }
