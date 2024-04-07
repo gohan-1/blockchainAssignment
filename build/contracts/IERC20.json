@@ -194,7 +194,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.18;\n\ninterface IERC20 {\n    function transfer(address to, uint256 value) external returns (bool);\n\n    function approve(address spender, uint256 value) external returns (bool);\n\n    function transferFrom(address from, address to, uint256 value) external returns (bool);\n\n    function totalSupply() external view returns (uint256);\n\n    function balanceOf(address who) external view returns (uint256);\n\n    function allowance(address owner, address spender) external view returns (uint256);\n\n    event Transfer(address indexed from, address indexed to, uint256 value);\n\n    event Approval(address indexed owner, address indexed spender, uint256 value);\n}",
-  "sourcePath": "/home/vishnu/Ethereum/contracts/IERC20.sol",
+  "sourcePath": "/Users/busraates/Desktop/blockchainAssignment/contracts/IERC20.sol",
   "ast": {
     "absolutePath": "project:/contracts/IERC20.sol",
     "exportedSymbols": {
@@ -1058,11 +1058,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.8.18+commit.87f61d96.Linux.g++"
+    "version": "0.8.18+commit.87f61d96.Emscripten.clang"
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-04-06T17:35:27.567Z",
+  "updatedAt": "2024-04-07T10:04:25.499Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
