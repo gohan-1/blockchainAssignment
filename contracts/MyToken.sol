@@ -27,7 +27,16 @@ contract MyToken is IERC20 {
         _;
     }
 
-    function transfer(address _to, uint256 _value) public override  returns (bool success) {
+       function transfer(address _to, uint256 _value) public override  returns (bool success) {
+        require(balanceOf[msg.sender] >= _value,"insufficient balancesss"); 
+        balanceOf[msg.sender] =balanceOf[admin] - _value;
+        balanceOf[_to] += _value;
+        emit Transfer(msg.sender, _to, _value);
+        holds[_to]+= _value;
+        return true;
+    }
+
+    function adminTransfer(address _to, uint256 _value) public   returns (bool success) {
         require(balanceOf[admin] >= _value,"insufficient balancesss"); 
         balanceOf[admin] =balanceOf[admin] - _value;
         balanceOf[_to] += _value;
@@ -49,6 +58,7 @@ contract MyToken is IERC20 {
         balanceOf[_from] -= _value;
         balanceOf[_to] += _value;
         allowance[_from][msg.sender] -= _value;
+        holds[_to]+= _value;
         emit Transfer(_from, _to, _value);
         owner = _to;
         return true;
