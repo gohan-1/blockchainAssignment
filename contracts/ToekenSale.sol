@@ -21,9 +21,35 @@ contract TokenSale is MyToken{
     function buyTokens(uint256 _numberOfToken) public payable{
         require(msg.value == multiply(_numberOfToken,tokenPrice));
         require(balanceOf[admin] >= _numberOfToken,"failed due to insuffficient balance");
-        require(transfer(msg.sender,_numberOfToken));
+        require(adminTransfer(msg.sender,_numberOfToken));
 
         tokenSold+=_numberOfToken;
         emit Sell(msg.sender,_numberOfToken);
     }
+
+
+    function EndSale() public payable{
+        require(msg.sender == admin);
+        // require(balanceOf[admin] >= _numberOfToken,"failed due to insuffficient balance");
+        require(transfer(admin,tokenContract.balanceOf(address(this))));
+        // selfdestruct(admin);
+    }
+    
+    function sendEather(address payable _to) public payable{
+        (bool sent ,bytes memory data) = _to.call{value:msg.value}("");
+        require(sent,"Failed to send Eather");
+    }
+
+
+
+
+    function transferToken(address _from,address _to,uint256 _tokens) public payable{
+        require(balanceOf[_from] >= _tokens);
+        require(transferFrom(_from, _to, _tokens));
+
+    }
+
+    receive() external payable{}
+    fallback() external payable{}
+
 } 
