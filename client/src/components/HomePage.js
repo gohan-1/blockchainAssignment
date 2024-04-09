@@ -48,21 +48,37 @@ const HomePage = () => {
   
   
     return (
-      <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex flex-col space-y-4">
-        <h2 className="font-bold text-xl">Buy Tokens</h2>
+    <div className="bg-white shadow-lg rounded-lg p-8 max-w-2xl mx-auto mt-10">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold uppercase mb-1"> TOKEN  SALE</h1>
+        <p className="text-gray-600">Introducing " Token". Token price in Ether.</p>
+      </div>
+      <div className="mb-6">
+        <label htmlFor="tokenAmount" className="block text-gray-700 text-sm font-bold mb-2">Amount:</label>
         <input
+          id="tokenAmount"
           type="number"
           value={tokensToBuy}
           onChange={e => setTokensToBuy(e.target.value)}
-          className="input input-bordered w-full max-w-xs"
-          placeholder="Tokens to Buy"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="0"
         />
-        <button onClick={handleBuyTokens} className="btn btn-primary bg-blue">Buy Tokens</button>
-  
-        
       </div>
-    );
-  };
+      <div className="text-center">
+        <button
+          onClick={handleBuyTokens}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Buy Tokens
+        </button>
+      </div>
+      <div className="mt-6">
+        <p className="text-gray-600">/<span className="font-semibold">{tokenSale && tokenSale.tokensSold}</span> tokens sold</p>
+        <p className="text-gray-600">Your Account: <span className="font-semibold">{account}</span></p>
+      </div>
+    </div>
+  );
+};
   
   export default HomePage;
 
