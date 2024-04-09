@@ -8,7 +8,7 @@ const HomePage = () => {
     const [web3, setWeb3] = useState(null);
     const [account, setAccount] = useState('');
     const [tokenSale, setTokenSale] = useState(null);
-    const [tokenPrice, setTokenPrice] = useState('');
+    const [tokenPrice, setTokenPrice] = useState('1');
     const [tokensToBuy, setTokensToBuy] = useState(1);
     
   
@@ -32,6 +32,7 @@ const HomePage = () => {
   
     const handleBuyTokens = async () => {
       const priceToPay = web3.utils.toWei((tokenPrice * tokensToBuy).toString(), 'ether');
+      console.log(priceToPay)
   
       try {
         const transactionReceipt = await tokenSale.methods.buyTokens(tokensToBuy.toString()).send({
@@ -42,6 +43,7 @@ const HomePage = () => {
       } catch (error) {
         console.error('Error buying tokens:', error);
         alert('There was an error purchasing tokens.');
+        
       }
     };
   
