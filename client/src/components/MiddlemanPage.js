@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MiddlemanPage = () => {
-    // Your code here
+    
 
     return (
         <div>
