@@ -22,9 +22,11 @@ const HomePage = () => {
   
         const tokenSaleInstance = new web3Instance.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
         setTokenSale(tokenSaleInstance);
-  
-        const price = await tokenSaleInstance.methods.tokenPrice().call();
-        setTokenPrice(web3Instance.utils.fromWei(price, 'ether'));
+        console.log(tokenSaleInstance)
+        const price = await tokenSaleInstance.methods.name().call();
+        // setTokenPrice(web3Instance.utils.fromWei(price, 'ether'));
+        console.log('price')
+        console.log(price)
       };
   
       loadBlockchainData();
