@@ -87,7 +87,7 @@ function App() {
           placeholder="Enter number of tokens to buy"
           required
         />
-        <button type="submit">Buy Tokens</button>
+        <button type="submit">Buy Tokens Price</button>
       </form>
     </div>
   );

@@ -3,106 +3,150 @@ import Web3 from 'web3';
 import MyToken from '../contracts/MyToken.json';
 import TokenSale from '../contracts/TokenSale.json';
 
+
+
+
+
 const CommissionerPage = () => {
     const [account, setAccount] = useState('');
-    const [web3, setWeb3] = useState(null);
-    const [myToken, setMyToken] = useState(null);
-    const [tokenSale, setTokenSale] = useState(null);
-    const [tokenBalance, setTokenBalance] = useState('0');
+    const [fromAddress, setFromAddress] = useState(''); // Added state for fromAddress
     const [toAddress, setToAddress] = useState('');
     const [amount, setAmount] = useState('');
     const [message, setMessage] = useState('');
-
+    const [web3, setWeb3] = useState(null);
+    const [myToken, setMyToken] = useState(null);
+  
+    
     useEffect(() => {
         const loadBlockchainData = async () => {
+          try {
             if (window.ethereum) {
-                const web3 = new Web3(window.ethereum);
-                await window.ethereum.enable();
-                const accounts = await web3.eth.getAccounts();
-                setAccount(accounts[0]);
-                const networkId = await web3.eth.net.getId();
-
-                const deployedNetworkMyToken = MyToken.networks[networkId];
-                const deployedNetworkTokenSale = TokenSale.networks[networkId];
-                const myTokenInstance = new web3.eth.Contract(MyToken.abi, deployedNetworkMyToken.address);
-                const tokenSaleInstance = new web3.eth.Contract(TokenSale.abi, deployedNetworkTokenSale.address);
-
-                setWeb3(web3);
-                setMyToken(myTokenInstance);
-                setTokenSale(tokenSaleInstance);
-
-                if (myTokenInstance) {
-                    const balance = await myTokenInstance.methods.balanceOf(accounts[0]).call();
-                    setTokenBalance(balance);
-                }
+              window.web3 = new Web3(window.ethereum);
+              await window.ethereum.enable();
+            } else if (window.web3) {
+              window.web3 = new Web3(window.web3.currentProvider);
             } else {
-                console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+              console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
             }
+    
+            const web3 = window.web3;
+            console.log(web3)
+            console.log("-------")
+            setWeb3(web3)
+            const accounts = await web3.eth.getAccounts();
+            console.log(accounts)
+            setAccount(accounts[0])
+            const networkId = await web3.eth.net.getId();
+            const networkDataMyToken = MyToken.networks[networkId];
+            const networkDataSale = TokenSale.networks[networkId];
+    
+            if (networkDataMyToken && networkDataSale) {
+              const myToken = new web3.eth.Contract(MyToken.abi, networkDataMyToken.address);
+              setMyToken(myToken);
+              
+              
+              const address = await web3.eth.getCoinbase();
+              console.log(networkDataMyToken.address)
+              setAccount(address);
+    
+              console.log(myToken)
+              
+    
+            //   const tokenPrice = await tokenSale.methods.tokenPrice().call()
+            //   setTokenPrices(tokenPrice)
+              
+    
+              
+    
+            //   console.log(balanceOfADmin)
+            }
+          } catch (error) {
+            console.error('Error loading blockchain data:', error);
+          }
         };
-
         loadBlockchainData();
     }, []);
 
-    const handleTransfer = async (event) => {
-        event.preventDefault();
-        if (!web3 || !myToken) {
-            setMessage('Web3 or token contract not loaded');
-            return;
-        }
+    
+    
+    
 
-        try {
-            const amountInWei = web3.utils.toWei(amount, 'ether');
-            console.log(`web3 ${web3}`)
-            await myToken.methods.transfer(toAddress, amountInWei).send({ from: account });
-            setMessage(`Successfully transferred ${amount} tokens to ${toAddress}`);
-        } catch (error) {
-            console.error('Transfer error:', error);
-            setMessage('Error transferring tokens. See console.');
-        }
-
-        setToAddress('');
-        setAmount('');
-    };
 
     
-    const formattedTokenBalance = web3 ? web3.utils.fromWei(tokenBalance, 'ether') : 'Loading...';
+        
+        
+    const handleTransferFrom = async (event) => {
+            event.preventDefault();
+            console.log('Contract instance at time of transfer:', myToken);
+            if (!web3 || !myToken) {
+                setMessage('Web3 or token contract not loaded');
+                return;
+            }
 
-    return (
-        <div>
-            <h1>Token Dashboard</h1>
-            <p>Account: {account}</p>
+            console.log(myToken)
             
-
-            <form onSubmit={handleTransfer}>
-                <div>
-                    <label htmlFor="toAddress">To Address:</label>
-                    <input
-                        id="toAddress"
-                        type="text"
-                        value={toAddress}
-                        onChange={(e) => setToAddress(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="amount">Amount to Transfer:</label>
-                    <input
-                        id="amount"
-                        type="number"
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Transfer Tokens</button>
-            </form>
-
-            {message && <p>{message}</p>}
-        </div>
-    );
+            try {
+                const amountInWei = web3.utils.toWei(amount, 'ether');
+                console.log(amountInWei);
+                console.log("-----")
+                await myToken.methods.transferFrom(fromAddress, toAddress, amountInWei).send({ from: account });
+                setMessage(`Successfully transferred ${amount} tokens from ${fromAddress} to ${toAddress}`);
+            } catch (error) {
+                console.error('Transfer error:', error);
+                setMessage('Error transferring');
+            }
+    
+            setFromAddress('');
+            setToAddress('');
+            setAmount('');
+        };
+    
+        return (
+            <div>
+                <h1>Token Dashboard</h1>
+                <p>Connected Account: {account}</p>
+                <form onSubmit={handleTransferFrom}>
+                    <div>
+                        <label htmlFor="fromAddress">From Address:</label>
+                        <input
+                            id="fromAddress"
+                            type="text"
+                            value={fromAddress}
+                            onChange={(e) => setFromAddress(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="toAddress">To Address:</label>
+                        <input
+                            id="toAddress"
+                            type="text"
+                            value={toAddress}
+                            onChange={(e) => setToAddress(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="amount">Amount:</label>
+                        <input
+                            id="amount"
+                            type="number"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit">Transfer Tokens</button>
+                </form>
+    
+                {message && <p>{message}</p>}
+            </div>
+        );
 }
-
+    
 export default CommissionerPage;
+
+
 
 
 
