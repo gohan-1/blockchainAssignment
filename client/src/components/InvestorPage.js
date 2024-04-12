@@ -27,7 +27,7 @@ const InvestorPage = () => {
      } else if (window.web3) {
        window.web3 = new Web3(window.web3.currentProvider);
      } else {
-       console.log('Non-Ethereum browser detected. Consider trying MetaMask!');
+       console.log('Non-Ethereum browser');
        return;
      }
 
