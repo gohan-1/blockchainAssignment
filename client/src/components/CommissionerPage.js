@@ -52,6 +52,7 @@ const CommissionerPage = () => {
 
         try {
             const amountInWei = web3.utils.toWei(amount, 'ether');
+            console.log(`web3 ${web3}`)
             await myToken.methods.transfer(toAddress, amountInWei).send({ from: account });
             setMessage(`Successfully transferred ${amount} tokens to ${toAddress}`);
         } catch (error) {
