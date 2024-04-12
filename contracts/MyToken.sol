@@ -2,23 +2,25 @@
 pragma solidity ^0.8.18;
 import './IERC20.sol';
 contract MyToken is IERC20 {
-    // constructor
-    string public name = "My Token";
-    string public symbol = "VIS";
+    // initalize toke properties
+    string constant public name = "My Token";
+    string constant public symbol = "VIS";
     string public standard = "MyToken version 0.1";
     uint256 public totalSupply;
-    address public owner;
+    address[] public owners;
     mapping(address => uint256) holds; 
     address public admin;
 
     mapping(address => mapping(address => uint256)) public allowance;
     mapping(address => uint256)  public balanceOf;
 
-    constructor(uint256 _initialSupply) {
+   
+
+    constructor(uint256  _initialSupply) {
          admin = msg.sender;
         balanceOf[admin] = _initialSupply;
         totalSupply = _initialSupply;
-        owner=admin;
+        owners=[admin];
        
     }
 
@@ -26,8 +28,21 @@ contract MyToken is IERC20 {
         require(msg.sender == admin, "Admin can only do this operation");
         _;
     }
+    modifier ownerAccess(){
+        assert(msg.sender != admin);
+        _;
+    }
 
-    function transfer(address _to, uint256 _value) public override  returns (bool success) {
+       function transfer(address _to, uint256 _value) public override  returns (bool success) {
+        require(balanceOf[msg.sender] >= _value,"insufficient balancesss"); 
+        balanceOf[msg.sender] =balanceOf[admin] - _value;
+        balanceOf[_to] += _value;
+        emit Transfer(msg.sender, _to, _value);
+        holds[_to]+= _value;
+        return true;
+    }
+
+    function adminTransfer(address _to, uint256 _value) public  virtual returns (bool success) {
         require(balanceOf[admin] >= _value,"insufficient balancesss"); 
         balanceOf[admin] =balanceOf[admin] - _value;
         balanceOf[_to] += _value;
@@ -49,8 +64,9 @@ contract MyToken is IERC20 {
         balanceOf[_from] -= _value;
         balanceOf[_to] += _value;
         allowance[_from][msg.sender] -= _value;
+        holds[_to]+= _value;
         emit Transfer(_from, _to, _value);
-        owner = _to;
+        owners.push(_to);
         return true;
     }
 }
