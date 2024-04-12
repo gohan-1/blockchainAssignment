@@ -122,7 +122,7 @@ function App() {
             <p>TokenPrice: {tokenPrice}</p>
           </div>
   
-          <button type="submit" style={{ marginLeft: "auto", maxWidth: '150px' }} className="btn btn-primary btn-block">Buy Tokens</button>
+          <button type="submit" style={{ marginLeft: "auto", maxWidth: '150px' }} className="btn btn-primary btn-block">Set Tokens Price</button>
         </div>
       </form>
 
