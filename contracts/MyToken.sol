@@ -53,7 +53,7 @@ contract MyToken is IERC20 {
 
     function approve(address _spender, uint256 _value) public override returns (bool success){
         // Allowance function
-        allowance[msg.sender][_spender] = _value;
+        allowance[msg.sender][_spender] += _value;
         emit Approval(msg.sender, _spender, _value);
         return true;
     }

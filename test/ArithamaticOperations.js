@@ -1,12 +1,12 @@
 
 
-const ArithamaticOperations = artifacts.require("./ArithamaticOperations");
+const ArithmeticOperations = artifacts.require("./ArithmeticOperations");
 
-contract('ArithamaticOperations', (accounts) => {
+contract('ArithmeticOperations', (accounts) => {
     let arithmaticOperations;
 
     before(async () => {
-        arithmaticOperations = await ArithamaticOperations.deployed();
+        arithmaticOperations = await ArithmeticOperations.deployed();
     });
 
     it('calculateTip function should return the correct tip', async () => {

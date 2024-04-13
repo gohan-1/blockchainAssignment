@@ -3,6 +3,7 @@ import Web3 from 'web3';
 import MyToken from '../contracts/MyToken.json';
 import TokenSale from '../contracts/TokenSale.json';
 
+
 function App() {
   const [account, setAccount] = useState('');
   const [web3, setWeb3] = useState(null);
@@ -15,6 +16,12 @@ function App() {
   const [tokenPrice, setTokenPrice] = useState('');
   const [tokensToBuy, setTokensToBuy] = useState('');
   const [balance, setBalance] = useState('0');
+  const [approveUnit, setApproveUnit] = useState('0');
+  const [receiver, setReceiver] = useState('');
+  const [amount, setAmount] = useState('');
+  const [allowance,setAllowance] = useState('0')
+
+  
 
   useEffect(() => {
     const loadBlockchainData = async () => {
@@ -84,7 +91,29 @@ function App() {
       console.error("Error purchasing tokens:", error);
     }
   };
+  const handleApprove = async (event) => {
+    event.preventDefault();
+    if (!tokenSale) {
+      console.error("The token sale contract is not loaded.");
+      return;
+    }
 
+    try {
+      const priceInWei = web3.utils.toWei((tokenPrice * tokensToBuy).toString(), 'ether');
+      // await tokenSale.methods.appr(tokensToBuy).send({ from: account, value: priceInWei });
+      console.log("Tokens purchased successfully!");
+      console.log(myToken)
+      const approve = await tokenSale.methods.approve(receiver,amount).call({ from: account });
+      console.log(approve)
+      const standard = await tokenSale.methods.allowance(account,receiver).call()
+        setAllowance(standard)
+        console.log(standard)
+
+
+    } catch (error) {
+      console.error("Error purchasing tokens:", error);
+    }
+  };
   return (
     <div className="max-w-md mx-auto my-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Token Dashboard</h1>
@@ -113,6 +142,30 @@ function App() {
           Buy Tokens
         </button>
       </form>
+      <form onSubmit={handleApprove}>
+      <div>
+          <label htmlFor="receiver">Receiver Address:</label>
+          <input
+            id="receiver"
+            type="text"
+            value={receiver}
+            onChange={(e) => setReceiver(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="amount">Amount (in ETH):</label>
+          <input
+            id="amount"
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Approve Tokens</button>
+      </form>
+      {allowance}
     </div>
   );
   

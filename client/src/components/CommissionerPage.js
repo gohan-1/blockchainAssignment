@@ -15,6 +15,9 @@ const CommissionerPage = () => {
     const [message, setMessage] = useState('');
     const [web3, setWeb3] = useState(null);
     const [myToken, setMyToken] = useState(null);
+    const [tokenSale, setTokenSale] = useState(null);
+    const [allowance,setAllowance] = useState('0')
+
   
     
     useEffect(() => {
@@ -39,21 +42,28 @@ const CommissionerPage = () => {
             const networkId = await web3.eth.net.getId();
             const networkDataMyToken = MyToken.networks[networkId];
             const networkDataSale = TokenSale.networks[networkId];
+            
     
             if (networkDataMyToken && networkDataSale) {
               const myToken = new web3.eth.Contract(MyToken.abi, networkDataMyToken.address);
               setMyToken(myToken);
+              const tokenSale = new web3.eth.Contract(TokenSale.abi, networkDataSale.address);
+              setTokenSale(tokenSale)
               
               
               const address = await web3.eth.getCoinbase();
               console.log(networkDataMyToken.address)
               setAccount(address);
+              // const standard = await myToken.methods.allowance("0x943a3D20EB84bcc2D3C0f311DB79477bc5eB3270",account).call()
+              // setAllowance(standard)
+
+
     
               console.log(myToken)
               
     
-            //   const tokenPrice = await tokenSale.methods.tokenPrice().call()
-            //   setTokenPrices(tokenPrice)
+              // const tokenPrice = await tokenSale.methods.tokenPrice().call()
+              // setTokenPrices(tokenPrice)
               
     
               
@@ -89,8 +99,10 @@ const CommissionerPage = () => {
                 const amountInWei = web3.utils.toWei(amount, 'ether');
                 console.log(amountInWei);
                 console.log("-----")
-                await myToken.methods.transferFrom(fromAddress, toAddress, amountInWei).send({ from: account });
+                await tokenSale.methods.transferToken(fromAddress, toAddress).call({ from: account, value: amountInWei });
                 setMessage(`Successfully transferred ${amount} tokens from ${fromAddress} to ${toAddress}`);
+                // const standard = await myToken.methods.allowance("0x943a3D20EB84bcc2D3C0f311DB79477bc5eB3270",account).call()
+                // setAllowance(standard)
             } catch (error) {
                 console.error('Transfer error:', error);
                 setMessage('Error transferring');
@@ -102,6 +114,7 @@ const CommissionerPage = () => {
         };
     
         return (
+<<<<<<< HEAD
           <div className="max-w-lg mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-bold text-center mb-6">Token Dashboard</h1>
             <p className="text-gray-800 text-sm mb-4">Connected Account: {account}</p>
@@ -149,6 +162,47 @@ const CommissionerPage = () => {
         
             {message && <p className="text-center text-gray-600 mt-4">{message}</p>}
           </div>
+=======
+            <div>
+                <h1>Token Dashboard</h1>
+                <p>Connected Account: {account}</p>
+                <form onSubmit={handleTransferFrom}>
+                    <div>
+                        <label htmlFor="fromAddress">From Address:</label>
+                        <input
+                            id="fromAddress"
+                            type="text"
+                            value={fromAddress}
+                            onChange={(e) => setFromAddress(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="toAddress">To Address:</label>
+                        <input
+                            id="toAddress"
+                            type="text"
+                            value={toAddress}
+                            onChange={(e) => setToAddress(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="amount">Amount:</label>
+                        <input
+                            id="amount"
+                            type="number"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit">Transfer Tokens</button>
+                </form>
+                {allowance}
+                {message && <p>{message}</p>}
+            </div>
+>>>>>>> fff7299c59cb1381ecd2dc7e73729e999b06375b
         );
         
 }
