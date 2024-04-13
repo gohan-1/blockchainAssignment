@@ -3,11 +3,10 @@
 pragma solidity ^0.8.18;
 contract ArithmeticOperations{
     function calculateTip(uint256 value) public pure returns (uint256 tip) {
-        // Perform the division first to avoid overflow
+       
         uint256 dividedValue = value / 10;
 
-        // Multiply the divided value by 100 to get the tip amount
-        // tip = dividedValue * 100;
+    
 
         return dividedValue;
     }
