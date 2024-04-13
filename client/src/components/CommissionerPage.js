@@ -15,6 +15,9 @@ const CommissionerPage = () => {
     const [message, setMessage] = useState('');
     const [web3, setWeb3] = useState(null);
     const [myToken, setMyToken] = useState(null);
+    const [tokenSale, setTokenSale] = useState(null);
+    const [allowance,setAllowance] = useState('0')
+
   
     
     useEffect(() => {
@@ -39,21 +42,28 @@ const CommissionerPage = () => {
             const networkId = await web3.eth.net.getId();
             const networkDataMyToken = MyToken.networks[networkId];
             const networkDataSale = TokenSale.networks[networkId];
+            
     
             if (networkDataMyToken && networkDataSale) {
               const myToken = new web3.eth.Contract(MyToken.abi, networkDataMyToken.address);
               setMyToken(myToken);
+              const tokenSale = new web3.eth.Contract(TokenSale.abi, networkDataSale.address);
+              setTokenSale(tokenSale)
               
               
               const address = await web3.eth.getCoinbase();
               console.log(networkDataMyToken.address)
               setAccount(address);
+              // const standard = await myToken.methods.allowance("0x943a3D20EB84bcc2D3C0f311DB79477bc5eB3270",account).call()
+              // setAllowance(standard)
+
+
     
               console.log(myToken)
               
     
-            //   const tokenPrice = await tokenSale.methods.tokenPrice().call()
-            //   setTokenPrices(tokenPrice)
+              // const tokenPrice = await tokenSale.methods.tokenPrice().call()
+              // setTokenPrices(tokenPrice)
               
     
               
@@ -89,8 +99,10 @@ const CommissionerPage = () => {
                 const amountInWei = web3.utils.toWei(amount, 'ether');
                 console.log(amountInWei);
                 console.log("-----")
-                await myToken.methods.transferFrom(fromAddress, toAddress, amountInWei).send({ from: account });
+                await tokenSale.methods.transferToken(fromAddress, toAddress).call({ from: account, value: amountInWei });
                 setMessage(`Successfully transferred ${amount} tokens from ${fromAddress} to ${toAddress}`);
+                // const standard = await myToken.methods.allowance("0x943a3D20EB84bcc2D3C0f311DB79477bc5eB3270",account).call()
+                // setAllowance(standard)
             } catch (error) {
                 console.error('Transfer error:', error);
                 setMessage('Error transferring');
@@ -138,7 +150,7 @@ const CommissionerPage = () => {
                     </div>
                     <button type="submit">Transfer Tokens</button>
                 </form>
-    
+                {allowance}
                 {message && <p>{message}</p>}
             </div>
         );

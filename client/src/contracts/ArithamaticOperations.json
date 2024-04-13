@@ -1,5 +1,5 @@
 {
-  "contractName": "ArithamaticOperations",
+  "contractName": "ArithmeticOperations",
   "abi": [
     {
       "inputs": [
@@ -47,7 +47,7 @@
       "constant": true
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.18+commit.87f61d96\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"calculateTip\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"tip\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"x\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"y\",\"type\":\"uint256\"}],\"name\":\"multiply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"z\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/ArithamaticOperations.sol\":\"ArithamaticOperations\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/ArithamaticOperations.sol\":{\"keccak256\":\"0xedb62b6cfcea0d3ed277affd167e7beec838ed2f41a3e0606bb432a54af4443c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dfadae750912f4d9296a19ea88236d8c03111ecc75018b0656e0393b9e2a699a\",\"dweb:/ipfs/QmYuiKBoz8nwnb7pBVZfrrhLeTEB1qEN83egAnShBPtW1Y\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.18+commit.87f61d96\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"calculateTip\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"tip\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"x\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"y\",\"type\":\"uint256\"}],\"name\":\"multiply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"z\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/ArithmeticOperations.sol\":\"ArithmeticOperations\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/ArithmeticOperations.sol\":{\"keccak256\":\"0xedb62b6cfcea0d3ed277affd167e7beec838ed2f41a3e0606bb432a54af4443c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://dfadae750912f4d9296a19ea88236d8c03111ecc75018b0656e0393b9e2a699a\",\"dweb:/ipfs/QmYuiKBoz8nwnb7pBVZfrrhLeTEB1qEN83egAnShBPtW1Y\"]}},\"version\":1}",
   "bytecode": "0x608060405234801561001057600080fd5b50610322806100206000396000f3fe608060405234801561001057600080fd5b5060043610610053576000357c010000000000000000000000000000000000000000000000000000000090048063314eebf814610058578063fc6e663314610088575b600080fd5b610072600480360381019061006d9190610184565b6100b8565b60405161007f91906101d3565b60405180910390f35b6100a2600480360381019061009d91906101ee565b6100f5565b6040516100af91906101d3565b60405180910390f35b6000808214806100e657508260ff1682838560ff166100d7919061024a565b9250826100e491906102bb565b145b6100ef57600080fd5b92915050565b600080600a8361010591906102bb565b905080915050919050565b600080fd5b600060ff82169050919050565b61012b81610115565b811461013657600080fd5b50565b60008135905061014881610122565b92915050565b6000819050919050565b6101618161014e565b811461016c57600080fd5b50565b60008135905061017e81610158565b92915050565b6000806040838503121561019b5761019a610110565b5b60006101a985828601610139565b92505060206101ba8582860161016f565b9150509250929050565b6101cd8161014e565b82525050565b60006020820190506101e860008301846101c4565b92915050565b60006020828403121561020457610203610110565b5b60006102128482850161016f565b91505092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60006102558261014e565b91506102608361014e565b925082820261026e8161014e565b915082820484148315176102855761028461021b565b5b5092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601260045260246000fd5b60006102c68261014e565b91506102d18361014e565b9250826102e1576102e061028c565b5b82820490509291505056fea264697066735822122068071d6f197025c35434b3a0be02d557cf4c04de917224574707b679c3d69cd564736f6c63430008120033",
   "deployedBytecode": "0x608060405234801561001057600080fd5b5060043610610053576000357c010000000000000000000000000000000000000000000000000000000090048063314eebf814610058578063fc6e663314610088575b600080fd5b610072600480360381019061006d9190610184565b6100b8565b60405161007f91906101d3565b60405180910390f35b6100a2600480360381019061009d91906101ee565b6100f5565b6040516100af91906101d3565b60405180910390f35b6000808214806100e657508260ff1682838560ff166100d7919061024a565b9250826100e491906102bb565b145b6100ef57600080fd5b92915050565b600080600a8361010591906102bb565b905080915050919050565b600080fd5b600060ff82169050919050565b61012b81610115565b811461013657600080fd5b50565b60008135905061014881610122565b92915050565b6000819050919050565b6101618161014e565b811461016c57600080fd5b50565b60008135905061017e81610158565b92915050565b6000806040838503121561019b5761019a610110565b5b60006101a985828601610139565b92505060206101ba8582860161016f565b9150509250929050565b6101cd8161014e565b82525050565b60006020820190506101e860008301846101c4565b92915050565b60006020828403121561020457610203610110565b5b60006102128482850161016f565b91505092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60006102558261014e565b91506102608361014e565b925082820261026e8161014e565b915082820484148315176102855761028461021b565b5b5092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601260045260246000fd5b60006102c68261014e565b91506102d18361014e565b9250826102e1576102e061028c565b5b82820490509291505056fea264697066735822122068071d6f197025c35434b3a0be02d557cf4c04de917224574707b679c3d69cd564736f6c63430008120033",
   "immutableReferences": {},
@@ -1851,12 +1851,12 @@
   ],
   "sourceMap": "58:476:0:-:0;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "58:476:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;411:115;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;94:312;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;411:115;469:9;500:1;497;:4;:21;;;;517:1;505:13;;513:1;510;508;:3;;;;;;:::i;:::-;506:5;;;505:9;;;;:::i;:::-;:13;497:21;489:30;;;;;;411:115;;;;:::o;94:312::-;152:11;231:20;262:2;254:5;:10;;;;:::i;:::-;231:33;;387:12;380:19;;;94:312;;;:::o;88:117:4:-;197:1;194;187:12;334:86;369:7;409:4;402:5;398:16;387:27;;334:86;;;:::o;426:118::-;497:22;513:5;497:22;:::i;:::-;490:5;487:33;477:61;;534:1;531;524:12;477:61;426:118;:::o;550:135::-;594:5;632:6;619:20;610:29;;648:31;673:5;648:31;:::i;:::-;550:135;;;;:::o;691:77::-;728:7;757:5;746:16;;691:77;;;:::o;774:122::-;847:24;865:5;847:24;:::i;:::-;840:5;837:35;827:63;;886:1;883;876:12;827:63;774:122;:::o;902:139::-;948:5;986:6;973:20;964:29;;1002:33;1029:5;1002:33;:::i;:::-;902:139;;;;:::o;1047:470::-;1113:6;1121;1170:2;1158:9;1149:7;1145:23;1141:32;1138:119;;;1176:79;;:::i;:::-;1138:119;1296:1;1321:51;1364:7;1355:6;1344:9;1340:22;1321:51;:::i;:::-;1311:61;;1267:115;1421:2;1447:53;1492:7;1483:6;1472:9;1468:22;1447:53;:::i;:::-;1437:63;;1392:118;1047:470;;;;;:::o;1523:118::-;1610:24;1628:5;1610:24;:::i;:::-;1605:3;1598:37;1523:118;;:::o;1647:222::-;1740:4;1778:2;1767:9;1763:18;1755:26;;1791:71;1859:1;1848:9;1844:17;1835:6;1791:71;:::i;:::-;1647:222;;;;:::o;1875:329::-;1934:6;1983:2;1971:9;1962:7;1958:23;1954:32;1951:119;;;1989:79;;:::i;:::-;1951:119;2109:1;2134:53;2179:7;2170:6;2159:9;2155:22;2134:53;:::i;:::-;2124:63;;2080:117;1875:329;;;;:::o;2210:180::-;2258:77;2255:1;2248:88;2355:4;2352:1;2345:15;2379:4;2376:1;2369:15;2396:410;2436:7;2459:20;2477:1;2459:20;:::i;:::-;2454:25;;2493:20;2511:1;2493:20;:::i;:::-;2488:25;;2548:1;2545;2541:9;2570:30;2588:11;2570:30;:::i;:::-;2559:41;;2749:1;2740:7;2736:15;2733:1;2730:22;2710:1;2703:9;2683:83;2660:139;;2779:18;;:::i;:::-;2660:139;2444:362;2396:410;;;;:::o;2812:180::-;2860:77;2857:1;2850:88;2957:4;2954:1;2947:15;2981:4;2978:1;2971:15;2998:185;3038:1;3055:20;3073:1;3055:20;:::i;:::-;3050:25;;3089:20;3107:1;3089:20;:::i;:::-;3084:25;;3128:1;3118:35;;3133:18;;:::i;:::-;3118:35;3175:1;3172;3168:9;3163:14;;2998:185;;;;:::o",
-  "source": "\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.18;\ncontract ArithamaticOperations{\n    function calculateTip(uint256 value) public pure returns (uint256 tip) {\n        // Perform the division first to avoid overflow\n        uint256 dividedValue = value / 10;\n\n        // Multiply the divided value by 100 to get the tip amount\n        // tip = dividedValue * 100;\n\n        return dividedValue;\n    }\n    function multiply(uint8 x, uint256 y) public pure returns(uint256 z){\n        require(y==0 || (z=x*y)/y ==x);\n    }\n\n    \n}",
-  "sourcePath": "/home/vishnu/latest-blockchain/contracts/ArithamaticOperations.sol",
+  "source": "\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.18;\ncontract ArithmeticOperations{\n    function calculateTip(uint256 value) public pure returns (uint256 tip) {\n        // Perform the division first to avoid overflow\n        uint256 dividedValue = value / 10;\n\n        // Multiply the divided value by 100 to get the tip amount\n        // tip = dividedValue * 100;\n\n        return dividedValue;\n    }\n    function multiply(uint8 x, uint256 y) public pure returns(uint256 z){\n        require(y==0 || (z=x*y)/y ==x);\n    }\n\n    \n}",
+  "sourcePath": "/home/vishnu/latest-blockchain/contracts/ArithmeticOperations.sol",
   "ast": {
-    "absolutePath": "project:/contracts/ArithamaticOperations.sol",
+    "absolutePath": "project:/contracts/ArithmeticOperations.sol",
     "exportedSymbols": {
-      "ArithamaticOperations": [
+      "ArithmeticOperations": [
         45
       ]
     },
@@ -1878,7 +1878,7 @@
       {
         "abstract": false,
         "baseContracts": [],
-        "canonicalName": "ArithamaticOperations",
+        "canonicalName": "ArithmeticOperations",
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
@@ -1886,7 +1886,7 @@
         "linearizedBaseContracts": [
           45
         ],
-        "name": "ArithamaticOperations",
+        "name": "ArithmeticOperations",
         "nameLocation": "67:21:0",
         "nodeType": "ContractDefinition",
         "nodes": [
@@ -2467,12 +2467,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x81f7621a99f43fB16DB2De21B734571ecB2179D0",
-      "transactionHash": "0xb701d6d536877021f09a7989bf380caba7d52c53075fda8ebb3f80cf0396d587"
+      "address": "0x8bcDb711f698c162326Fd8709d3De92d06684bfC",
+      "transactionHash": "0xb2c1550a93cd1221439a566e53aff20d224ee58b1786ff823f34f10653608658"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-04-13T14:04:30.501Z",
+  "updatedAt": "2024-04-13T19:56:29.764Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
