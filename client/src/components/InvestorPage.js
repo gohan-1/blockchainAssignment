@@ -14,6 +14,7 @@ function App() {
   const [totalSupply, setTotalSupply] = useState('');
   const [tokenPrice, setTokenPrice] = useState('');
   const [tokensToBuy, setTokensToBuy] = useState('');
+  const [balance, setBalance] = useState('0');
 
   useEffect(() => {
     const loadBlockchainData = async () => {
@@ -45,8 +46,10 @@ function App() {
         const price = await tokenSaleInstance.methods.tokenPrice().call();
         setTokenPrice(web3.utils.fromWei(price, 'ether'));
 
-        const supply = await myTokenInstance.methods.totalSupply().call();
-        setTotalSupply(supply);
+        // const supply = await myTokenInstance.methods.totalSupply().call();
+        // setTotalSupply(supply);
+
+      
       }
     };
 
@@ -64,6 +67,19 @@ function App() {
       const priceInWei = web3.utils.toWei((tokenPrice * tokensToBuy).toString(), 'ether');
       await tokenSale.methods.buyTokens(tokensToBuy).send({ from: account, value: priceInWei });
       console.log("Tokens purchased successfully!");
+      console.log(myToken)
+      const name = await myToken.methods.name().call()
+      setName(name)
+      const symbol = await myToken.methods.symbol().call()
+      setSymbol(symbol)
+      const standard = await myToken.methods.standard().call()
+      setStandard(standard)
+      const balance = await tokenSale.methods.balanceOf(account).call();
+      console.log('balaceOf')
+      console.log(balance)
+
+      setBalance(balance);
+
     } catch (error) {
       console.error("Error purchasing tokens:", error);
     }
@@ -75,8 +91,9 @@ function App() {
       <p>Account: {account}</p>
       <p>Token Name: {name}</p>
       <p>Symbol: {symbol}</p>
+
       <p>Standard: {standard}</p>
-      <p>Total Supply: {totalSupply.toString()}</p>
+      <p>Total Supply: {balance.toString()}</p>
       <p>Token Price: {tokenPrice} ETH</p>
 
       <form onSubmit={handleBuyTokens}>
