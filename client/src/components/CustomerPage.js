@@ -115,34 +115,48 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Send Ether</h1>
-      <form onSubmit={handleSendEther}>
+    <div className="max-w-md mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold text-center mb-6">Send Ether</h1>
+      <form onSubmit={handleSendEther} className="space-y-4">
         <div>
-          <label htmlFor="receiver">Receiver Address:</label>
+          <label htmlFor="receiver" className="block text-gray-700 text-sm font-bold mb-2">
+            Receiver Address:
+          </label>
           <input
             id="receiver"
             type="text"
             value={receiver}
             onChange={(e) => setReceiver(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
         </div>
         <div>
-          <label htmlFor="amount">Amount (in ETH):</label>
+          <label htmlFor="amount" className="block text-gray-700 text-sm font-bold mb-2">
+            Amount (in ETH):
+          </label>
           <input
             id="amount"
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
         </div>
-        <button type="submit">Send Ether</button>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Send Ether
+        </button>
       </form>
-      <p>{message}</p>
+      {message && (
+        <p className="text-center text-gray-600 mt-4">{message}</p>
+      )}
     </div>
   );
+  
 };
 
 export default App;

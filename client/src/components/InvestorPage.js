@@ -86,28 +86,36 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Token Dashboard</h1>
-      <p>Account: {account}</p>
-      <p>Token Name: {name}</p>
-      <p>Symbol: {symbol}</p>
-
-      <p>Standard: {standard}</p>
-      <p>Total Supply: {balance.toString()}</p>
-      <p>Token Price: {tokenPrice} ETH</p>
-
-      <form onSubmit={handleBuyTokens}>
+    <div className="max-w-md mx-auto my-8">
+      <h1 className="text-3xl font-bold mb-6 text-center">Token Dashboard</h1>
+      <div className="space-y-4 mb-6">
+        <p><span className="font-semibold">Account:</span> {account}</p>
+        <p><span className="font-semibold">Token Name:</span> {name}</p>
+        <p><span className="font-semibold">Symbol:</span> {symbol}</p>
+        <p><span className="font-semibold">Standard:</span> {standard}</p>
+        <p><span className="font-semibold">Total Supply:</span> {balance.toString()}</p>
+        <p><span className="font-semibold">Token Price:</span> {tokenPrice} ETH</p>
+      </div>
+  
+      <form onSubmit={handleBuyTokens} className="flex flex-col items-center">
         <input
           type="number"
           value={tokensToBuy}
           onChange={e => setTokensToBuy(e.target.value)}
           placeholder="Enter number of tokens to buy"
+          className="px-3 py-2 border border-gray-300 rounded shadow-sm mb-4 w-full"
           required
         />
-        <button type="submit">Buy Tokens Price</button>
+        <button
+          type="submit"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        >
+          Buy Tokens
+        </button>
       </form>
     </div>
   );
+  
 }
 
 export default App;

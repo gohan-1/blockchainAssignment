@@ -1,91 +1,54 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 
+function HomePage() {
+  return (
+    <div className="container mx-auto p-8">
+      <h1 className="text-4xl font-bold text-center mb-8">Welcome to Our Platform</h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+        <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+          <div className="space-y-1">
+            <div className="text-xl font-medium text-black">Admin</div>
+            <Link to="/admin" className="btn text-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Go to Dashboard
+            </Link>
+          </div>
+        </div>
 
-// HomePage.js
-import React, { useState, useEffect } from 'react';
-import Web3 from 'web3';
-import { CONTRACT_ABI, CONTRACT_ADDRESS } from '../env';
+        <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+          <div className="space-y-1">
+            <div className="text-xl font-medium text-black">Investor</div>
+            <Link to="/investor" className="btn text-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+              View Investments
+            </Link>
+          </div>
+        </div>
 
-const HomePage = () => {
-    const [web3, setWeb3] = useState(null);
-    const [account, setAccount] = useState('');
-    const [tokenSale, setTokenSale] = useState(null);
-    const [tokenPrice, setTokenPrice] = useState('1');
-    const [tokensToBuy, setTokensToBuy] = useState(1);
-    
-  
-    useEffect(() => {
-      const loadBlockchainData = async () => {
-        const web3Instance = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
-        setWeb3(web3Instance);
-  
-        const accounts = await web3Instance.eth.getAccounts();
-        setAccount(accounts[0]);
-  
-        const tokenSaleInstance = new web3Instance.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
-        setTokenSale(tokenSaleInstance);
-        console.log(tokenSaleInstance)
-        const price = await tokenSaleInstance.methods.name().call();
-        // setTokenPrice(web3Instance.utils.fromWei(price, 'ether'));
-        console.log('price')
-        console.log(price)
-      };
-  
-      loadBlockchainData();
-    }, []);
-  
-    const handleBuyTokens = async () => {
-      const priceToPay = web3.utils.toWei((tokenPrice * tokensToBuy).toString(), 'ether');
-      console.log(priceToPay)
-  
-      try {
-        const transactionReceipt = await tokenSale.methods.buyTokens(tokensToBuy.toString()).send({
-          from: account,
-          value: priceToPay
-        });
-        console.log(`Successfully purchased ${tokensToBuy} tokens!`, transactionReceipt);
-      } catch (error) {
-        console.error('Error buying tokens:', error);
-        alert('There was an error purchasing tokens.');
-        
-      }
-    };
-  
-  
-  
-    return (
-    <div className="bg-white shadow-lg rounded-lg p-8 max-w-2xl mx-auto mt-10">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold uppercase mb-1"> TOKEN  SALE</h1>
-        <p className="text-gray-600">Introducing " Token". Token price in Ether.</p>
-      </div>
-      <div className="mb-6">
-        <label htmlFor="tokenAmount" className="block text-gray-700 text-sm font-bold mb-2">Amount:</label>
-        <input
-          id="tokenAmount"
-          type="number"
-          value={tokensToBuy}
-          onChange={e => setTokensToBuy(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="0"
-        />
-      </div>
-      <div className="text-center">
-        <button
-          onClick={handleBuyTokens}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Buy Tokens
-        </button>
-      </div>
-      <div className="mt-6">
-        <p className="text-gray-600">/<span className="font-semibold">{tokenSale && tokenSale.tokensSold}</span> tokens sold</p>
-        <p className="text-gray-600">Your Account: <span className="font-semibold">{account}</span></p>
+        <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+          <div className="space-y-1">
+            <div className="text-xl font-medium text-black">Commissioner</div>
+            <Link to="/com" className="btn text-lg bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+              Manage Regulations
+            </Link>
+          </div>
+        </div>
+
+        <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+          <div className="space-y-1">
+            <div className="text-xl font-medium text-black">Customer</div>
+            <Link to="/customer" className="btn text-lg bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+              Start Shopping
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
-};
-  
-  export default HomePage;
+}
+
+export default HomePage;
+
 
 
 

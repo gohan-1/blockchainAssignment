@@ -100,42 +100,38 @@ function App() {
       console.error("Error handling form submission:", error);
     }
   };
-  
   return (
-    <div>
-      {/* <Main /> */}
-  
+    <div className="max-w-xl mx-auto my-8">
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "flex", maxWidth: '500px' }} className="content mr-auto ml-auto" >
+        <div className="flex flex-col gap-4">
           <input
             id="postContent"
             type="number"
-            className="form-control"
+            className="block w-full px-3 py-2 text-base text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             placeholder="number of tokens"
             required
           />
-          <div>
-            <p>Account: {account}</p>
-            <p>Token Name: {name}</p>
-            <p>Symbol: {symbol}</p>
-            <p>Standard: {standard}</p>
-            <p>TotalSupply: {totalSupply.toString()}</p>
-            <p>TokenPrice: {tokenPrice}</p>
+          <div className="space-y-2 text-center">
+            <p className="font-semibold">Account: {account}</p>
+            <p className="font-semibold">Token Name: {name}</p>
+            <p className="font-semibold">Symbol: {symbol}</p>
+            <p className="font-semibold">Standard: {standard}</p>
+            <p className="font-semibold">TotalSupply: {totalSupply.toString()}</p>
+            <p className="font-semibold">TokenPrice: {tokenPrice}</p>
           </div>
-  
-          <button type="submit" style={{ marginLeft: "auto", maxWidth: '150px' }} className="btn btn-primary btn-block">Set Tokens Price</button>
+    
+          <button
+            type="submit"
+            className="w-full px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
+            Set Tokens Price
+          </button>  
+   
         </div>
       </form>
-
-      <br />
-      {/* <ProgressBar className="content mr-auto ml-auto" style={{ display: "flex", maxWidth: '500px' }} animated now={45} />
-      <br />
-      <Card style={{ display: "flex", maxWidth: '700px' }} className="content mr-auto ml-auto" >
-        <Card.Body>Deployer Acccount</Card.Body>
-        <Card.Body>{account}</Card.Body>
-      </Card> */}
     </div>
   );
+ 
 }
 
 export default App;
