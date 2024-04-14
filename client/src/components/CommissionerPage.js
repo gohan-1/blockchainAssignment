@@ -48,6 +48,11 @@ const CommissionerPage = () => {
               const address = await web3.eth.getCoinbase();
               console.log(networkDataMyToken.address)
               setAccount(address);
+<<<<<<< HEAD
+=======
+           
+
+>>>>>>> d05af34e633f0c3f3ddbaf8a0a0cbb7e66d6fc8d
     
               console.log(myToken)
               
@@ -102,6 +107,7 @@ const CommissionerPage = () => {
         };
     
         return (
+<<<<<<< HEAD
           <div className="max-w-lg mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-bold text-center mb-6">Token Dashboard</h1>
             <p className="text-gray-800 text-sm mb-4">Connected Account: {account}</p>
@@ -149,8 +155,48 @@ const CommissionerPage = () => {
         
             {message && <p className="text-center text-gray-600 mt-4">{message}</p>}
           </div>
+=======
+            <div>
+                <h1>Token Dashboard</h1>
+                <p>Connected Account: {account}</p>
+                <form onSubmit={handleTransferFrom}>
+                    <div>
+                        <label htmlFor="fromAddress">From Address:</label>
+                        <input
+                            id="fromAddress"
+                            type="text"
+                            value={fromAddress}
+                            onChange={(e) => setFromAddress(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="toAddress">To Address:</label>
+                        <input
+                            id="toAddress"
+                            type="text"
+                            value={toAddress}
+                            onChange={(e) => setToAddress(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="amount">Amount:</label>
+                        <input
+                            id="amount"
+                            type="number"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit">Transfer Tokens</button>
+                </form>
+                {allowance}
+                {message && <p>{message}</p>}
+            </div>
+>>>>>>> d05af34e633f0c3f3ddbaf8a0a0cbb7e66d6fc8d
         );
-        
 }
     
 export default CommissionerPage;

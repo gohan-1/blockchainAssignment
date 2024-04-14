@@ -5,28 +5,17 @@ import './ArithmeticOperations.sol';
 
 
 contract TokenSale is MyToken,ArithmeticOperations{
-    // need to add aggrgation and composition
-    // 1 more class needed 
-    // Optimised for    Gas
-    //polymorphic
-    // static and dynmic  modiiers
-    //use of structures and enums
-    // Balance None Pre-balanceOf transfer Post-balanceOf Correct Result
-   
-    
+     
     MyToken public tokenContract;
-    //In wei
     uint256 public tokenPrice;
     uint8 public tokenSold;
     mapping(address=>mapping (address=> uint256)) public validToken;
     event Sell(address from, uint256 _amount);
     mapping(address => Commissioner) public commissioners;
     event TransferFailed(address indexed recipient, uint8 numberOfTokens, string reason);
-
     bool private locked = false;
     enum CommissionStatus { RECEIVED ,NOT_RECEIVED }
     event CommissionerAdded(address indexed addr, string name);
-
     
     struct Commissioner {
         address addr;
@@ -37,12 +26,9 @@ contract TokenSale is MyToken,ArithmeticOperations{
             tokenContract = _tokenContract;
     } 
 
-
     function setTokenPrice(uint256  _price) public onlyAdmin{
         tokenPrice = _price ;
     }
-
-
 
      function addCommissioner(address _addr, string memory _name) external {
         require(commissioners[_addr].addr == _addr, "Commissioner already exists");
@@ -59,7 +45,7 @@ contract TokenSale is MyToken,ArithmeticOperations{
     function buyTokens(uint8 _numberOfTokens) public payable checkBalance(balanceOf[admin], _numberOfTokens) {
         uint256 totalPrice = multiply(_numberOfTokens, tokenPrice);
         require(msg.value == totalPrice, "Incorrect payment amount");
-
+   
         bool transferSuccessful = adminTransfer(msg.sender, _numberOfTokens);
         if (!transferSuccessful) {
                 // Refund the buyer if the transfer fails
@@ -67,7 +53,7 @@ contract TokenSale is MyToken,ArithmeticOperations{
                 // Emit the failure event with a reason
                 emit TransferFailed(msg.sender , _numberOfTokens, "Token transfer failed");
                 return;
-            }
+        }
 
             tokenSold += _numberOfTokens;
             emit Sell(msg.sender, _numberOfTokens);
@@ -105,15 +91,9 @@ contract TokenSale is MyToken,ArithmeticOperations{
         validToken[_to][msg.sender] = uint256((_value)/tokenPrice);
     }
 
-
-
-
-
     function transferToken(address _from,address _to) public payable{
         require(balanceOf[_from] >= validToken[msg.sender][_to]);
         assert(transferFrom(_from, _to, validToken[msg.sender][_to]));
-     
-
     }
 
     receive() external payable{}
