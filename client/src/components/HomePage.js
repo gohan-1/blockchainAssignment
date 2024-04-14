@@ -22,6 +22,7 @@ function HomePage() {
             <Link to="/investor" className="btn text-lg bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               View Investments
             </Link>
+            
           </div>
         </div>
 
